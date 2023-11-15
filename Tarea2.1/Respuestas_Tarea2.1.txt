@@ -1,0 +1,12 @@
+¿El resultado fue mejor o peor?
+R/ En mi caso fue mejor, el score del modelo paso de un 0.6493047284699522 (como se dejó en clase) a un 0.9403949304806871. Lo cual es un aumento bastante significativo, ahora se puede observar que muchas predicciones están razonablemente cerca del precio real.
+
+¿Por qué crees que es así?
+R/ Porque agregué unas nuevas características que le ayudaron al modelo a ajustarse a aquellos registros que contenían valores fijos, como los precios de casas mayores a 500,000. En lugar de manipular esos datos que contenían valores fijos cree características que describieran cosas como el número promedio de habitaciones por casa, el número de habitaciones por persona, el precio promedio de cada habitación y el número de personas por casa. La clave estaba encontrar el precio promedio de cada habitación, ya que con esa información el modelo pudo finalmente ajustarse a las casas que tenían un precio mayor a 500k, ya que teniendo el precio promedio de cada habitación de casas de una misma zona, el modelo pudo calcularlo a partir del número de habitaciones que esta tenía. Si lo pensamos bien, eso tiene sentido; las casas que tienen precios mayores a 500k a de ser porque probablemente sean casas con muchas habitaciones y ubicadas en terrenos más grandes y por ejemplo al tener un promedio de lo que cuesta cada habitación de las casas de los vecinos yo podría sacar el estimado de lo que cuesta esa casa grande ya que generalmente la arquitectura y el estilo constructivo se comparten por zonas.  
+
+
+
+
+LINK DEL COLLAB POR CUALQUIER COSA:
+
+https://colab.research.google.com/drive/1T9rKN89fgqWUPEi--ALH3z9Z4dxgoa9A?usp=sharing
