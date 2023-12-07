@@ -30,7 +30,9 @@ import Handsigns from "@/utils/handsigns";
 const videoCam = ref();
 const DETECTION_INTERVAL_MILLISECONDS = 250;
 let sign = ref(null);
-
+// eslint-disable-next-line
+let temp = "";
+let contador = 0;
 
 // pedimos permiso para inicializar la camara
 function initialiseWebCamera() {
@@ -107,6 +109,7 @@ const handleSignDetection = (detector) => {
         Handsigns.xSign,
         Handsigns.ySign,
         Handsigns.zSign,
+        Handsigns.thumbs_down,
       ]);
 
       const landmark = hands[0].keypoints3D.map((value) => [
@@ -126,7 +129,7 @@ const handleSignDetection = (detector) => {
           sign.value = estimatedGestures.gestures[maxConfidence].name;
           // eslint-disable-next-line
           console.log("Valor del signo:" , estimatedGestures.gestures[maxConfidence].name);
-          
+          await writeSign(sign.value)
         } else {
           sign.value = null;
         }
@@ -135,6 +138,42 @@ const handleSignDetection = (detector) => {
   }, DETECTION_INTERVAL_MILLISECONDS);
 };
 
+// contamos las apariciones de cada letra antes de escribirla al texbox 
+// para asi eliminar falsos positivos, ya que el modelo detecta 
+const writeSign = async (sign)=>{
+  console.log("recibido ", sign)
+  if (temp=="") {
+    temp =sign
+  } else {
+    if (temp==sign) {
+      contador++; 
+    }
+  }
+
+  if (contador>10) {
+    console.log("La letra ", sign," ha aparecido ",contador ," veces")
+
+    if(sign=="Borrar"){
+      console.log("borrando palabra")
+      let txt = document.getElementById("result").value
+      txt = txt.substr(0,txt.length-1);
+      console.log(txt)
+      document.getElementById("result").value = txt
+
+    }else{
+        if(sign=="thumbs_up"){
+          console.log("agregando espacio")
+          document.getElementById("result").value += " ";
+        }else{
+          document.getElementById("result").value += sign;
+        }
+    }
+    contador = 0;
+
+  }
+  temp=sign; //GUARDAR LA ULTIMA LETRA
+
+};
 onMounted(async () => {
   initialiseWebCamera();
   // eslint-disable-next-line
@@ -161,6 +200,11 @@ onMounted(async () => {
   position: relative;
 }
 
+.result{
+  font-size: 1.5rem;
+  width: 50%;
+  font-style: bold;
+}
 .peer-video {
   height: 50%;
   width: 50%;
