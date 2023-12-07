@@ -33,7 +33,7 @@ yarn serve
 
 Al iniciar la app nos encontramos con ese error muchas veces, llegamos a la conclusión de que era algo error de red porque los datos de esa librería esta siendo entregados mediante una CDN, y también el error se va con solo actualizar la paginas de 2-10 veces, es bien raro. Pero aparte de eso todo funciona como debería.
 
-![alt text](https://i.ibb.co/RvBTtDn/err.png)
+![error de cdn?](https://i.ibb.co/RvBTtDn/err.png)
 #### Para corregir ese bug solo tenemos que actualizar la pagina varias veces
 
 ## Autores
