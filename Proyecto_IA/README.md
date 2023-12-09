@@ -3,7 +3,6 @@
  
 Prototipo de un detector de lenguaje de señas muy básico utilizando modelos pre-entrenados de tensorflow.js(MediaPipe, hand-pose-detection y FingerPose), implementado en Vue.js
 
-![Test](https://i.ibb.co/XVkVDfr/sat-231207-145731.png)
 
 ## Instalación
 
